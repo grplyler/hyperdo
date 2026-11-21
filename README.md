@@ -253,7 +253,7 @@ xychart-beta
 
 ## People are saying things
 
-> "I literally made this in like 30 mins so I could be way cooler. But it Fu**ing works and I love that for me."
+> "I literally made this in like 30 mins so I could build something way cooler. But it Fu**ing works and I love that for me (and you I guess)."
 >
 > **The creator of Hyperdo** · the one real quote in this section
 
