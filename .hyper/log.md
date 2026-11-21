@@ -23,3 +23,4 @@
 [T10 19:31] DONE: plugins/hyper/skills/{add,do}/SKILL.md, README.md (--split/--force)
 [lead] ADD T11 p:5: git init, private repo grplyler/hyperdo, push
 [T11 19:31] claimed; owns .gitignore; secret scan clean; doing git init + private repo
+[T11 19:32] DONE: .gitignore, initial commit ca9d163 on main, private repo https://github.com/grplyler/hyperdo pushed, tracking origin/main

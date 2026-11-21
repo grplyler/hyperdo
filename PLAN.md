@@ -79,7 +79,7 @@ check: grep dev_mode in config, init, plan, do, WORKER.md, README; default solo.
 4. README command reference: add the flags.
 check: grep shows --split and --force in add, do, README with the no-split fallback.
 
-### T11 git init + private GitHub repo · p:5 · m:haiku · owns: .gitignore · deps: — · status: doing:T11
+### T11 git init + private GitHub repo · p:5 · m:haiku · owns: .gitignore · deps: — · status: done
 User-approved outward action: create PRIVATE repo github.com/grplyler/hyperdo and push.
 1. `git init -b main`; write .gitignore: `.hyper/locks/`, `.hyper/logs/`, `.DS_Store`, `.claude/settings.local.json`. Check no secrets (grep -rIl for key/token patterns); stop and report if found.
 2. Commit all files (in-progress edits by other workers are fine; they'll commit later per solo mode).
