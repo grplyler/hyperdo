@@ -134,3 +134,10 @@ check: `cat plugins/hyper/skills/*/SKILL.md WORKER.md | wc -l` ≤ the step-1 nu
 3. If the first-screen bullets now repeat the subtitle word for word, trim the repetition; change nothing else.
 4. Commit and push (solo mode).
 check: the key phrases of the GitHub description ("Minimal parallel agent orchestration for Claude Code", "PLAN.md", "file locks", "shared log") all appear in the first 10 lines of README.md.
+
+### T17 MIT LICENSE · p:5 · m:haiku · owns: LICENSE · shares: README.md, .claude-plugin/marketplace.json · deps: — · status: done
+1. Write `LICENSE` at the repo root: the standard MIT License text, unmodified, with `Copyright (c) 2026 Ryan Plyler` (name from `git config user.name`; year 2026).
+2. README: replace the "No `LICENSE` file yet" wording in the License section with `MIT — see [LICENSE](LICENSE).`; add an MIT badge next to the existing badge only if it fits the current one-badge style (static shields badge linking to LICENSE). Change nothing else.
+3. If a plugin/marketplace manifest has (or supports, per its existing fields) a `license` field, set it to `"MIT"`; don't invent fields in a schema that doesn't show one.
+4. Commit and push (solo mode).
+check: `head -1 LICENSE` = "MIT License"; `grep -c "Ryan Plyler" LICENSE` = 1; `grep -ci "no .LICENSE. file" README.md` = 0; README links `LICENSE`; JSON manifests still parse.

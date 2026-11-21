@@ -63,3 +63,6 @@
 [T15] DONE: README.md, .claude-plugin/marketplace.json, plugins/hyper/skills/{add,config}/SKILL.md
 [lead] ADD T16 p:5: align README subtitle to the GitHub description (queued: deps T15, which owns README.md)
 [T16 19:41] DONE: README.md (subtitle replaced verbatim with GitHub description)
+[lead] ADD T17 p:5: add MIT LICENSE (Copyright 2026 Ryan Plyler), update README license section
+[T17 19:42] claimed; locks README.md, .claude-plugin/marketplace.json; LICENSE owned
+[T17 19:42] DONE: LICENSE, README.md (commit cf21d05, pushed); marketplace/plugin.json have no license field, left unchanged
