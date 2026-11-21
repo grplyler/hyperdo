@@ -9,7 +9,7 @@ State: `.hyper/config` (lines `key=value`). Keys: `max_workers` (1-20, default 3
 
 - Args given (e.g. `rigor=slow max_workers=6`) → write them, skip questions.
 - No args → read current values, then ask in two AskUserQuestion calls (max 4 questions each; mark current value "(current)"). Call 1:
-  1. Max workers: 2 / 4 / 6 / 8
+  1. Max workers: 2 / 3 / 6 / 8
   2. Max do workers: 1 / 2 / 4 / 0 (disabled)
   3. Testing rigor: fast (narrowest check) / medium (affected tests per thread) / slow (tests every change + review)
   4. Worker model: auto (route by task) / opus / sonnet / haiku

@@ -8,7 +8,9 @@
 
 </div>
 
-You describe a goal. Hyperdo splits it into parallel **threads**, each owning a disjoint set of files, and launches background Claude agents to build them. Progress lives in plain files in your repo (`PLAN.md` and `.hyper/`), so you can read it, edit it, and commit it. There is no server, no database, and no framework: the plugin is a handful of `SKILL.md` files plus one `WORKER.md` protocol.
+Hyperdo is small on purpose. The whole plugin is 7 Markdown skill files plus one `WORKER.md` protocol, about 230 lines together, installed by a 7-line shell script. No runtime, no daemon, no server, no database: it needs only the `claude` CLI and bash. All state is plain files in your repo (`PLAN.md` and `.hyper/`) that you can read and edit by hand, and `./uninstall.sh` removes everything it installed.
+
+You describe a goal. Hyperdo splits it into parallel **threads**, each owning a disjoint set of files, and launches background Claude agents to build them.
 
 - **No merge conflicts by design.** Every thread declares the files it `owns:`. Touching anything else needs a lock first.
 - **Agents talk to each other.** Workers post to an append-only log, ask for contract changes, and release files when something urgent comes in.
@@ -23,24 +25,21 @@ git clone https://github.com/grplyler/hyperdo.git
 cd hyperdo && ./install.sh
 ```
 
-Restart Claude Code, then in any project:
+Restart Claude Code, then run `/hyper:init` and `/hyper:plan` in any project.
+
+## How you'd expect it to work
 
 ```text
-/hyper:init
-/hyper:plan 4 "add OAuth login with tests"
+/hyper:init                                   # set up this repo: CLAUDE.md + .hyper/
+/hyper:plan 4 "add OAuth login with tests"    # write PLAN.md, run up to 4 workers until done
+/hyper:add -p 10 "fix flaky session test"     # add one thread to the plan; urgent starts now
+/hyper:do "rename foo to bar"                 # one worker, right now, no plan
+/hyper:status                                 # show progress; changes nothing unless asked
+/hyper:config rigor=slow                      # change a setting; running work picks it up
+/hyper:clean                                  # delete hyper state, after showing the list
 ```
-
-That's it: the lead writes `PLAN.md` and starts up to 4 workers. Check in with `/hyper:status`.
 
 ## What it looks like
-
-```text
-/hyper:init                                   # analyze repo, write CLAUDE.md, create .hyper/
-/hyper:plan 4 "add OAuth login with tests"    # lead writes PLAN.md, launches up to 4 workers
-/hyper:status                                 # done/total, per-thread progress, locks, log tail
-/hyper:add -p 10 "fix flaky session test"     # urgent thread, starts immediately
-/hyper:do --model h55 "rename foo to bar"     # fire-and-forget one-off worker
-```
 
 The plan the lead writes (abridged):
 
@@ -111,7 +110,7 @@ The worker protocol, in short:
 
 ### Phases
 
-Long plans get phases automatically; you never assign or name them. When a plan has more than about four threads across several dependency levels, the lead groups them into milestones, each with a gate:
+Automatic, and only for long plans (more than four threads across several dependency levels): the lead groups threads into milestones, each with a gate. You never assign them.
 
 ```markdown
 ## Phase 2 api
@@ -186,13 +185,13 @@ Lowering limits never kills running workers; it only stops new launches.
 
 **What does it send where?** Hyperdo adds no network calls of its own. The agents talk to Claude as usual, and in `solo` mode workers `git push` to your `origin`. The installer only runs `claude plugin` commands against this directory.
 
-**Do I have to manage phases?** No. The lead adds them to long plans, `/hyper:add` files new threads into the right one, and short plans have none.
+**Do I have to manage phases?** No. They are automatic and optional: the lead adds them only to long plans and files new threads into the right one.
 
 **How do I remove it?** `./uninstall.sh` removes `~/.claude/hyperdo`, the plugin and the marketplace. Per-project state stays; run `/hyper:clean` in each project for that.
 
 ## Contributing
 
-The whole system is Markdown plus two shell scripts, so changes are easy to review.
+The whole system is Markdown plus two short shell scripts, so changes are easy to review.
 
 - Commands live in `plugins/hyper/skills/<name>/SKILL.md` (frontmatter `name` and `description`, then the instructions).
 - The worker protocol is `WORKER.md`; `install.sh` copies it to `~/.claude/hyperdo/`. Re-run `./install.sh` after changing it.

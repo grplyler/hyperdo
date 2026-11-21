@@ -1,1 +1,1 @@
-{"name":"hyperdo","owner":{"name":"local"},"plugins":[{"name":"hyper","source":"./plugins/hyper","description":"Parallel sub-agent dev: /hyper:init, /hyper:plan, /hyper:add, /hyper:do, /hyper:config, /hyper:status, /hyper:clean"}]}
+{"name":"hyperdo","owner":{"name":"local"},"plugins":[{"name":"hyper","source":"./plugins/hyper","description":"Lightweight parallel Claude agents, plain Markdown, state in files you can edit: /hyper:init, /hyper:plan, /hyper:add, /hyper:do, /hyper:config, /hyper:status, /hyper:clean"}]}
