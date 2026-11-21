@@ -27,3 +27,15 @@
 [lead] ADD T12 p:7: rename Hyperlane → Hyperdo in README
 [T12 19:33] claimed; owns README.md; renaming Hyperlane -> Hyperdo (only README hits)
 [T12 19:33] DONE: README.md (Hyperlane -> Hyperdo; reworded naming notes at top and FAQ)
+[lead] ADD T13 p:5: rigorously eval README.md and fix it for human readers / GitHub stars
+[T13 20:05] claimed; owns README.md
+[T13 20:06] EVAL 1 tagline says "swarm"/"one markdown file is the truth" (hype, and untrue: state spans PLAN.md + .hyper/); no plain statement of the problem solved
+[T13 20:06] EVAL 2 install is 60 lines down, after a 7-bullet "Why it is different" wall; time-to-first-command too slow; clone placeholder <this-repo-url> instead of real URL
+[T13 20:06] EVAL 3 5 badges, 2 are filler/misleading ("dependencies: none" though claude CLI + bash required; static version badge drifts); remove
+[T13 20:06] EVAL 4 demo inaccuracies: `/hyper:add -p 9` logs `[lead] URGENT` but URGENT is p:10 only; `NEED T0→all` should be NEED T<k>→all from the posting worker; DONE line format is `[T<k>] DONE: ...` not `[T2 14:05] DONE`
+[T13 20:06] EVAL 5 FAQ "Does anything leave my machine?" is misleading: agents call Claude, and solo dev_mode pushes to origin; reword accurately
+[T13 20:06] EVAL 6 command table cells are paragraph-length (/hyper:add, /hyper:do); duplicated in "How it works"; Modes + Code Mode caveats + FAQ tests answer are walls of text
+[T13 20:06] EVAL 7 jargon (threads, lead, contracts) used before defined; top blockquote about naming is noise for a first-time reader
+[T13 20:06] EVAL 8 no "when to use / not use" guidance, so visitor can't judge fit; License section reads as an apology
+[T13 20:06] EVAL 9 verified OK: install steps, uninstall, all commands/flags/aliases, config keys+defaults, mermaid syntax, no hyperlane; no LICENSE file exists (not inventing one)
+[T13 20:12] DONE: README.md (rewritten; no LICENSE file exists, README says so; mermaid not machine-parsed, syntax reviewed by eye)

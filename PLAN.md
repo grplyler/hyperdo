@@ -92,3 +92,12 @@ check: `gh repo view grplyler/hyperdo --json visibility -q .visibility` = PRIVAT
 2. Remove/reword any line saying the product name differs from the repo/plugin name; the product is Hyperdo, commands stay `/hyper:*`.
 3. Commit and push (solo mode).
 check: `grep -rni hyperlane --exclude-dir=.git . | grep -v -e PLAN.md -e .hyper/` prints nothing.
+
+### T13 README eval + fix for humans/stars · p:5 · m:sonnet · owns: README.md · deps: — · status: done
+Goal: a README a human skims in 30 seconds, understands, trusts, and stars. Product name is Hyperdo — do not rename it; commands stay `/hyper:*`.
+1. Evaluate first, as a skeptical first-time visitor: read README.md top to bottom and log 5-10 concrete defects (`[T13] EVAL ...`): unclear pitch above the fold, slow time-to-first-command, walls of text, jargon before definition, AI-sounding filler/hype, redundant sections, weak or missing demo, buried install.
+2. Fact-check every claim against the source of truth: install.sh, uninstall.sh, WORKER.md, .claude-plugin/marketplace.json, plugins/hyper/skills/*/SKILL.md. Every command, flag, alias, config key, default and file path in the README must exist and match; nothing invented (no fake benchmarks, testimonials, star counts, or badges pointing at things that don't exist). Check the repo is private — badges/links that need a public repo must still be correct once public, and a LICENSE link needs a LICENSE file (if missing, say so in the log rather than inventing one).
+3. Rewrite: one-sentence pitch + why-care in the first screen, install + first command within ~15 lines, a short realistic demo (commands, sample PLAN.md thread, log lines), then how it works (keep/repair the mermaid diagram), command reference table, config table, FAQ, contributing, license. Plain, specific, human voice; cut anything that doesn't earn its place; keep it skimmable.
+4. Verify rendering: valid GitHub-flavored markdown, mermaid block parses, tables aligned, all relative links/anchors resolve.
+5. Commit and push (solo mode).
+check: every `/hyper:*` command and flag in README exists in the skills (`grep -o '/hyper:[a-z]*' README.md | sort -u` all have a skill dir); install steps match install.sh; `grep -ci hyperlane README.md` = 0; no broken relative links.
