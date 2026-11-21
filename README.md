@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="assets/mascot.svg" width="160" alt="Hyperdo mascot: a goofy orange blob with mismatched googly eyes and six noodle arms, each ticking its own checkbox">
+<img src="assets/mascot.svg" width="160" alt="Hyperdo mascot: a goofy orange bird with mismatched googly eyes, standing on one leg and juggling four checkboxes">
 
 # Hyperdo
 
