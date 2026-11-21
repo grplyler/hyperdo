@@ -74,3 +74,5 @@
 [T19 19:58] claimed site/index.html
 [T19 19:58] DESIGN parody of breathless dev-tool pages: absurd headline over the real pitch, jokes in asterisks/captions, real facts in cards/commands/FAQ. Sections: announce pill, hero+mascot sticker+install, fake logos, real-facts strip, what it does (6 cards), live demo (five bars stall at 99%), commands table, plan/log excerpt, 4 charts (alt-tabs 1 vs 5 agents, confidence vs understanding, PLAN.md hockey stick plateau 99%, afternoon donut), testimonials (fictional), pricing (solo/pro/prod = $0), FAQ, footer disclaimer
 [T19 20:00] DONE: site/index.html, artifact https://claude.ai/artifact/7Jx8Z3xwXqR6hbymdhwUaM (private)
+[lead] ADD T20 p:5: publish landing page on GitHub Pages, link from README + repo homepage (hyperdo.github.io unavailable: account taken)
+[T20 20:04] DONE: docs/index.html, docs/.nojekyll, README.md; live at https://grplyler.github.io/hyperdo/ (hyperdo.github.io unavailable: account taken); repo homepage set
