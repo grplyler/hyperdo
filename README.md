@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="assets/mascot.svg" width="160" alt="Hyperdo mascot: a small round orange bird sprinting flat out while juggling five checkboxes, four already ticked">
+<img src="assets/mascot.svg" width="160" alt="Hyperdo mascot: a small round orange bird sprinting while juggling five checkboxes in one clean arc, four already ticked">
 
 # Hyperdo
 
