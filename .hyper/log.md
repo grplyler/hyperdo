@@ -47,3 +47,19 @@
 [T14 20:30] DESIGN 4 add: phase of latest dep, else current open phase; re-opens a gated phase; reply appends (phase N). do "<task>" outside phases; status: done phases one line, open expanded
 [T14 20:36] DEFAULT prod approval asked once per gate before its dependent threads start; hold kept (1 line); clean/init untouched (phases live in PLAN.md, nothing breaks)
 [T14] DONE: plugins/hyper/skills/{plan,add,do,status}/SKILL.md, WORKER.md, README.md (automatic phases). User must re-run install.sh to pick up new WORKER.md
+[lead] ADD T15 p:5: emphasize simplicity/lightness; least-surprise audit of all skills (trim, no new features)
+[T15 19:40] claimed
+[T15] SIZE skills+WORKER.md=230 lines (add26 clean33 config20 do22 init43 plan52 status7 WORKER27); install.sh=7; README=204; commands=7; deps=none (markdown skills, no runtime)
+[T15] SIZE README=204 before; uninstall.sh=5; config keys=6; flags: -p --model --split --force --keep-plan --defaults
+[T15] SURPRISE add: auto-created config had only 3 keys, init/plan write 6 -> fixed (points to init defaults)
+[T15] SURPRISE add: worker prompt omitted Dev mode while plan/do pass it -> fixed
+[T15] SURPRISE config: max-workers choices 2/4/6/8 omit the default 3 that init offers -> fixed to 2/3/6/8
+[T15] SURPRISE add: routing rule duplicated from plan -> now points at hyper:plan step 4
+[T15] PROPOSE do with no args duplicates /hyper:plan resume (two ways to run the plan); consider dropping one
+[T15] PROPOSE code_mode key edits ~/.claude/settings.json (state outside the project, unexpected for a project config); consider docs-only
+[T15] PROPOSE init asks 6 questions though defaults exist; consider making --defaults the default and asking only via /hyper:config
+[T15] PROPOSE /hyper:do keeps legacy --opus/--sonnet/--haiku beside --model (two ways); consider removing
+[T15] NOTE user must re-run install.sh to pick up skill changes
+[T15] DONE: README.md, .claude-plugin/marketplace.json, plugins/hyper/skills/{add,config}/SKILL.md
+[lead] ADD T16 p:5: align README subtitle to the GitHub description (queued: deps T15, which owns README.md)
+[T16 19:41] DONE: README.md (subtitle replaced verbatim with GitHub description)

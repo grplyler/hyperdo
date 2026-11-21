@@ -127,3 +127,10 @@ User's words: "emphasize simplicity and lightweightness of the plugin. It should
 4. marketplace.json: align the plugin and command descriptions with the same simple/light wording; keep them one line each.
 5. Dry-read every skill once more for contradictions introduced by the edits (Modes sections, phases, --split, dev_mode, Checks rule). Commit and push (solo mode). Don't run install.sh or touch ~/.claude — log that the user must re-run install.sh.
 check: `cat plugins/hyper/skills/*/SKILL.md WORKER.md | wc -l` ≤ the step-1 number; `wc -l README.md` ≤ before; every number in README matches a `[T15] SIZE` line; `python3 -m json.tool .claude-plugin/marketplace.json` exits 0; every `/hyper:*` in README has a skill dir.
+
+### T16 README subtitle = GitHub description · p:5 · m:haiku · shares: README.md · deps: T15 · status: done
+1. Get the live description: `gh repo view grplyler/hyperdo --json description -q .description` (source of truth; don't edit it on GitHub).
+2. Replace the README subtitle/tagline (the pitch line directly under the `# Hyperdo` title) so it says the same thing in the same words — verbatim, or split across two lines if it reads better; nothing in it may contradict the description. Leave the rest of the README (including T15's edits) alone.
+3. If the first-screen bullets now repeat the subtitle word for word, trim the repetition; change nothing else.
+4. Commit and push (solo mode).
+check: the key phrases of the GitHub description ("Minimal parallel agent orchestration for Claude Code", "PLAN.md", "file locks", "shared log") all appear in the first 10 lines of README.md.
