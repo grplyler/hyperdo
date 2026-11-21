@@ -4,21 +4,35 @@
 
 # Hyperdo
 
+### Do five things at once. Understand none of them.
+
 **Minimal parallel agent orchestration for Claude Code. One lead plans the work as threads in PLAN.md; background workers build them side by side, coordinated by file locks and a shared log. Markdown-only state, no dependencies.**
 
 ![Claude Code plugin](https://img.shields.io/badge/Claude_Code-plugin-D97757?style=flat-square) [![License: MIT](https://img.shields.io/badge/License-MIT-blue?style=flat-square)](LICENSE)
 
 **[→ The extremely serious website](https://grplyler.github.io/hyperdo/)**
 
+*Revolutionary. Disruptive. Fits in a Markdown file. We checked.*
+
 </div>
+
+> **NEW:** Hyperdo now supports being installed. (It always did. We needed an announcement.)
+
+> [!NOTE]
+> This README is silly on purpose. The jokes are labelled; the commands, install steps, tables and anything in a code block are real and checked against the source.
 
 Hyperdo is small on purpose. The whole plugin is 7 Markdown skill files plus one `WORKER.md` protocol, about 230 lines together, installed by a 7-line shell script. No runtime, no daemon, no server, no database: it needs only the `claude` CLI and bash. All state is plain files in your repo (`PLAN.md` and `.hyper/`) that you can read and edit by hand, and `./uninstall.sh` removes everything it installed.
 
+| 7 | ~230 | 0 | 0 |
+| :---: | :---: | :---: | :---: |
+| Markdown skill files, plus one `WORKER.md` | lines, all of it together | runtimes, daemons, servers or databases | merge conflicts, by design\* |
+| *It is a short read. Read it.* | *Your last PR was longer.* | *Just the `claude` CLI and bash.* | *\*By design. Your design may vary.* |
+
 You describe a goal. Hyperdo splits it into parallel **threads**, each owning a disjoint set of files, and launches background Claude agents to build them.
 
-- **No merge conflicts by design.** Every thread declares the files it `owns:`. Touching anything else needs a lock first.
-- **Agents talk to each other.** Workers post to an append-only log, ask for contract changes, and release files when something urgent comes in.
-- **You stay in control.** Change worker limits, testing rigor or model while it runs. Edit `PLAN.md` by hand whenever you like.
+- **No merge conflicts by design.** Every thread declares the files it `owns:`. Touching anything else needs a lock first. *Translation: a polite sign on the bathroom door.*
+- **Agents talk to each other.** Workers post to an append-only log, ask for contract changes, and release files when something urgent comes in. *Translation: a group chat where everyone has read the instructions.*
+- **You stay in control.** Change worker limits, testing rigor or model while it runs. Edit `PLAN.md` by hand whenever you like. *Translation: the database is a text file. Yes, really.*
 
 ## Install
 
@@ -31,7 +45,11 @@ cd hyperdo && ./install.sh
 
 Restart Claude Code, then run `/hyper:init` and `/hyper:plan` in any project.
 
+That's the whole install. There is no step 3, no account, no "book a demo" and nothing to upgrade at 2am.
+
 ## How you'd expect it to work
+
+Seven commands. You will use two.
 
 ```text
 /hyper:init                                   # set up this repo: CLAUDE.md + .hyper/
@@ -64,7 +82,7 @@ POST /auth/callback -> { token: string }; session type lives in src/auth/types.t
 - [ ] check: npm test -- login
 ```
 
-While workers run, `.hyper/log.md` is their shared chat:
+While workers run, `.hyper/log.md` is their shared chat (five terminals, zero of them yours):
 
 ```text
 [lead] ADD T3 p:10: fix flaky session test
@@ -78,6 +96,8 @@ While workers run, `.hyper/log.md` is their shared chat:
 Good fit: a feature or refactor that splits into lanes touching different files (API plus UI plus tests, a rename across packages, a docs pass alongside code).
 
 Poor fit: a single tangled change where every step depends on the last. One agent does that better.
+
+Also a poor fit: wanting to understand what is happening at all times. See the charts.
 
 ## How it works
 
@@ -127,15 +147,15 @@ Thread format: `### T<k> <name> · p:<1-10> · m:<model> · owns: <globs> · dep
 
 ## Commands
 
-| Command | What it does |
-| --- | --- |
-| `/hyper:init [--defaults]` | Like `/init`, hyper-aware: writes or refreshes `CLAUDE.md`, creates `.hyper/`, asks for config (or takes defaults), then offers to run `/hyper:plan`. |
-| `/hyper:plan <N> "<goal>"` | Splits the goal into threads in `PLAN.md` and runs up to `N` workers until all are done. No args with an existing `PLAN.md` resumes. A new goal appends; it never overwrites. |
-| `/hyper:add [-p N] [--model <alias>] [--split [--force]] "<task>"` | Adds a thread with priority `N` (1-10, default 5) and starts a worker now if deps are done and a slot is free (or `N` >= 9). Priority 10 also logs `[lead] URGENT` so other workers release files it needs. |
-| `/hyper:do [--model <alias>] [--split [--force]] ["<task>"]` | With a task: one fire-and-forget worker outside `PLAN.md` (queued if `max_do` is reached). With no args: drives all ready threads in `PLAN.md`. |
-| `/hyper:config [key=value ...]` | Sets limits, rigor, model, dev mode and the Code Mode record via a question UI, or directly (`rigor=slow max_workers=6`). Applies live. |
-| `/hyper:status` | Done/total, each thread's status and step progress, held locks, last 10 log lines, failing checks with log paths. Can reset a stuck `doing` thread on request. |
-| `/hyper:clean [--keep-plan]` | Deletes `.hyper/` and, unless `--keep-plan`, `PLAN.md`, after listing everything and asking. Refuses while workers look alive. Never touches `CLAUDE.md` or source. |
+| Command | What it does | Vibe |
+| --- | --- | --- |
+| `/hyper:init [--defaults]` | Like `/init`, hyper-aware: writes or refreshes `CLAUDE.md`, creates `.hyper/`, asks for config (or takes defaults), then offers to run `/hyper:plan`. | Sets the table. |
+| `/hyper:plan <N> "<goal>"` | Splits the goal into threads in `PLAN.md` and runs up to `N` workers until all are done. No args with an existing `PLAN.md` resumes. A new goal appends; it never overwrites. | The big red button. |
+| `/hyper:add [-p N] [--model <alias>] [--split [--force]] "<task>"` | Adds a thread with priority `N` (1-10, default 5) and starts a worker now if deps are done and a slot is free (or `N` >= 9). Priority 10 also logs `[lead] URGENT` so other workers release files it needs. | "Also, one more thing." |
+| `/hyper:do [--model <alias>] [--split [--force]] ["<task>"]` | With a task: one fire-and-forget worker outside `PLAN.md` (queued if `max_do` is reached). With no args: drives all ready threads in `PLAN.md`. | Rename foo to bar. Go. |
+| `/hyper:config [key=value ...]` | Sets limits, rigor, model, dev mode and the Code Mode record via a question UI, or directly (`rigor=slow max_workers=6`). Applies live. | Knobs. |
+| `/hyper:status` | Done/total, each thread's status and step progress, held locks, last 10 log lines, failing checks with log paths. Can reset a stuck `doing` thread on request. | Refresh, but legal. |
+| `/hyper:clean [--keep-plan]` | Deletes `.hyper/` and, unless `--keep-plan`, `PLAN.md`, after listing everything and asking. Refuses while workers look alive. Never touches `CLAUDE.md` or source. | Fresh start energy. |
 
 **`--split`** (on `add` and `do`) lets the lead judge whether the task is 2+ independent parts with disjoint files and runs one thread or worker per part. If it is not, it logs `[lead] NOSPLIT <why>` and runs one. `--split --force` always splits into 2+ parts along the best seam; `--force` alone implies it.
 
@@ -175,7 +195,75 @@ Lowering limits never kills running workers; it only stops new launches.
 
 **Auto mode and plan mode.** In auto mode, no confirmation questions: defaults are picked and logged as `[lead] DEFAULT <choice>`, but destructive or outward-facing actions (force-push, deploy, deleting data) still need your OK, and `/hyper:clean` always confirms. In plan mode, `/hyper:plan` researches read-only and shows the threads via ExitPlanMode; nothing is written and no worker starts until you approve. The other commands describe what they would do and exit plan mode before writing.
 
+## Pricing
+
+Pick a plan. They all cost $0. The three plans are the three real `dev_mode` settings above.
+
+| Solo | Pro (most popular\*) | Prod |
+| :---: | :---: | :---: |
+| **$0** / forever | **$0** / forever | **$0** / forever |
+| *For people who push to main and sleep fine.* | *\*Popularity not measured.* | *For people who read the runbook.* |
+
+Your Claude usage is billed by Claude as usual. Hyperdo is MIT-licensed and adds no network calls of its own.
+
+## Charts, because every README needs them
+
+All made up, none of them a benchmark. Vibes are not units.
+
+```mermaid
+pie showData title Where the afternoon went (%)
+    "Watching the workers work" : 34
+    "Reading the log like a group chat" : 23
+    "Naming the threads" : 15
+    "Telling a coworker about it" : 12
+    "Re-running /hyper:status just in case" : 11
+    "Actual coding" : 5
+```
+
+```mermaid
+%%{init: {"themeVariables": {"xyChart": {"plotColorPalette": "#D97757, #7b5ea7"}}}}%%
+xychart-beta
+    title "PLAN.md checkboxes ticked (the last 1% is where the project lives now)"
+    x-axis "Hours since this-should-take-ten-minutes" [0, 1, 2, 3, 4, 5, 6, 7, 8]
+    y-axis "Ticked (%)" 0 --> 100
+    line [0, 1, 3, 9, 28, 66, 91, 99, 99]
+```
+
+```mermaid
+%%{init: {"themeVariables": {"xyChart": {"plotColorPalette": "#D97757, #7b5ea7"}}}}%%
+xychart-beta
+    title "Confidence (up) vs. understanding (down), in vibes"
+    x-axis "Hours into the session" [0, 1, 2, 3, 4, 5, 6, 7, 8]
+    y-axis "Vibes" 0 --> 100
+    line [20, 34, 55, 72, 84, 91, 96, 99, 100]
+    line [90, 80, 60, 44, 31, 21, 13, 8, 5]
+```
+
+## People are saying things
+
+> "I literally made this in like 30 mins so I could be way cooler. But it Fu**ing works and I love that for me."
+>
+> **The creator of Hyperdo** · the one real quote in this section
+
+> "I pressed Enter once and now there are five of me. I have never been more efficient or more tired."
+>
+> **A senior engineer, mass-produced** · Blorbo Labs, which does not exist
+
+> "Please stop merging at 4:55 on a Friday. Love, me."
+>
+> **Your future self** · reviewing the diff, via time machine
+
+> "Quack. (Translation: the locks are just `mkdir`. That is the whole trick.)"
+>
+> **A rubber duck** · unprompted
+
+> "At first I read every log line. Now I read the DONE lines. Soon I will read the headline of the DONE lines."
+>
+> **A vibe coder in transition** · fictional, like the rest of this section
+
 ## FAQ
+
+Questions, some answered. The first eight are real.
 
 **Why do the commands say `hyper`?** The plugin is named `hyper`; the repo and marketplace are `hyperdo`. Commands are namespaced by plugin.
 
@@ -193,6 +281,12 @@ Lowering limits never kills running workers; it only stops new launches.
 
 **How do I remove it?** `./uninstall.sh` removes `~/.claude/hyperdo`, the plugin and the marketplace. Per-project state stays; run `/hyper:clean` in each project for that.
 
+**Will it replace me?** *(joke)* No. Someone has to press Enter, and someone has to be blamed.
+
+**Is everything really 99% done?** *(joke)* Yes. This is normal.
+
+**Is this a real product?** *(real answer to a joke question)* The tool is real and the install steps work. The charts, the fake testimonials and Blorbo Labs are not.
+
 ## Contributing
 
 The whole system is Markdown plus two short shell scripts, so changes are easy to review.
@@ -205,3 +299,9 @@ The whole system is Markdown plus two short shell scripts, so changes are easy t
 ## License
 
 MIT — see [LICENSE](LICENSE).
+
+## Disclaimers
+
+**Plainly:** every chart, testimonial and company name in this README is made up, except the creator's quote, which is real. The commands, install steps and the facts about how Hyperdo works are real. No performance claim here is a measurement, and there are no real user numbers because we have not invented any.
+
+**Also plainly:** Literally zero seriousness was used in the creation of this tool, and I had the Flu... So... use at your own discretion.
