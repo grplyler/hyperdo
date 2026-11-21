@@ -1,6 +1,6 @@
 <div align="center">
 
-# Hyperlane
+# Hyperdo
 
 **Split a build into parallel lanes. Let a swarm of Claude agents drive them. One markdown file is the truth.**
 
@@ -12,9 +12,9 @@
 
 </div>
 
-> Hyperlane is the product name; the repository, marketplace and plugin are still called `hyperdo` / `hyper`, so every command below is `/hyper:*`.
+> Every command below is `/hyper:*`; the plugin is `hyper` and the repo and marketplace are `hyperdo`.
 
-Hyperlane is a minimalist, orchestrator-style development system for [Claude Code](https://claude.com/claude-code). You describe a goal. A **lead** agent splits it into **threads** with disjoint file ownership and writes them to `PLAN.md`. Background **workers** (sub-agents) pick up threads in parallel, lock the files they touch, and talk to each other through an append-only log. No server, no database, no framework: a plugin made of a few `SKILL.md` files, a `WORKER.md` protocol, and plain text files in your repo.
+Hyperdo is a minimalist, orchestrator-style development system for [Claude Code](https://claude.com/claude-code). You describe a goal. A **lead** agent splits it into **threads** with disjoint file ownership and writes them to `PLAN.md`. Background **workers** (sub-agents) pick up threads in parallel, lock the files they touch, and talk to each other through an append-only log. No server, no database, no framework: a plugin made of a few `SKILL.md` files, a `WORKER.md` protocol, and plain text files in your repo.
 
 ## 30-second demo
 
@@ -168,7 +168,7 @@ Code Mode caveats: experimental, interactive terminal only (not `-p`, VS Code, D
 
 ## FAQ
 
-**Why is it called Hyperlane if the commands say `hyper`?** The repo, marketplace (`hyperdo`) and plugin (`hyper`) names are kept so nothing breaks. Hyperlane is the name for the system itself.
+**Why do the commands say `hyper`?** The plugin is named `hyper`, and the repo and marketplace are `hyperdo`. Commands are namespaced by plugin.
 
 **Do I need to use git worktrees?** No. Isolation comes from disjoint file ownership and `mkdir` locks in a single working tree.
 
