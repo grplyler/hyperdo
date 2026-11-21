@@ -24,3 +24,6 @@
 [lead] ADD T11 p:5: git init, private repo grplyler/hyperdo, push
 [T11 19:31] claimed; owns .gitignore; secret scan clean; doing git init + private repo
 [T11 19:32] DONE: .gitignore, initial commit ca9d163 on main, private repo https://github.com/grplyler/hyperdo pushed, tracking origin/main
+[lead] ADD T12 p:7: rename Hyperlane → Hyperdo in README
+[T12 19:33] claimed; owns README.md; renaming Hyperlane -> Hyperdo (only README hits)
+[T12 19:33] DONE: README.md (Hyperlane -> Hyperdo; reworded naming notes at top and FAQ)

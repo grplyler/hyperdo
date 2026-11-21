@@ -86,3 +86,9 @@ User-approved outward action: create PRIVATE repo github.com/grplyler/hyperdo an
 3. `gh repo create grplyler/hyperdo --private --source=. --remote=origin --push`. If it already exists: `git remote add origin https://github.com/grplyler/hyperdo.git && git push -u origin main` (never force-push).
 4. Set `dev_mode=solo` line in .hyper/config if missing is NOT your job — just log the repo URL.
 check: `gh repo view grplyler/hyperdo --json visibility -q .visibility` = PRIVATE and `git status -sb` shows tracking origin/main.
+
+### T12 rename Hyperlane → Hyperdo · p:7 · m:haiku · owns: README.md · deps: — · status: done
+1. Replace every "Hyperlane"/"hyperlane" in README.md (and any other non-.hyper file found by grep) with "Hyperdo"/"hyperdo".
+2. Remove/reword any line saying the product name differs from the repo/plugin name; the product is Hyperdo, commands stay `/hyper:*`.
+3. Commit and push (solo mode).
+check: `grep -rni hyperlane --exclude-dir=.git . | grep -v -e PLAN.md -e .hyper/` prints nothing.
