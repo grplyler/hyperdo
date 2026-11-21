@@ -13,7 +13,7 @@ Read `.hyper/config` (defaults `max_do=2 rigor=fast dev_mode=solo`).
 
 **With a task** — direct strike, no planning. If `do` workers running ≥ max_do, say so and queue it as a line in `.hyper/log.md` (`[do QUEUED] <task>`); launch it when one finishes.
 - Launch one background Agent (model: `--model` override if given, else config `model` if not `auto`, else haiku for small/mechanical, sonnet for normal, opus for hard/debugging; legacy `--opus|--sonnet|--haiku` also accepted): `Do: <task>. Dev mode: <dev_mode> (per WORKER.md "Dev mode"; no git repo = skip git). Rigor: <rigor> (fast=narrowest check, medium=affected tests, slow=tests+self-review). Run checks per the Checks rule in ~/.claude/hyperdo/WORKER.md (full output to .hyper/logs/do-<check>.log; silent on exit 0; on failure only exit code, <=10 error lines, log path). Respect other workers: before editing a file run mkdir .hyper/locks/<path with / as __> (skip file if it fails), rmdir when done. Post one line to .hyper/log.md when done: [do HH:MM] <summary>.`
-- Don't edit PLAN.md. Reply one line listing every worker launched or queued.
+- Don't edit PLAN.md; do-tasks stay outside phases. Reply one line listing every worker launched or queued.
 
 **No args** — run the plan: follow step 4 (Orchestrate) of the hyper:plan skill.
 

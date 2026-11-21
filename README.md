@@ -109,6 +109,17 @@ The worker protocol, in short:
 5. Tick steps and run checks per rigor. Checks are silent on success; full output goes to `.hyper/logs/T<k>-<check>.log`.
 6. Finish: release locks, `status: done` (or `blocked:<why>`), log `[T<k>] DONE: <files>`, reply to the lead in at most 3 lines.
 
+### Phases
+
+Long plans get phases automatically; you never assign or name them. When a plan has more than about four threads across several dependency levels, the lead groups them into milestones, each with a gate:
+
+```markdown
+## Phase 2 api
+gate: npm test -- api
+```
+
+When a phase's last thread finishes, the lead runs the gate once and logs `[lead] PHASE 2 DONE` (or `PHASE 2 FAIL <log>` plus a fix thread). Only threads that depend on that phase wait for its gate; everything else keeps running. `/hyper:status` collapses done phases to one line. Add `· hold` to a phase heading to keep its threads from starting. Small plans stay flat.
+
 Thread format: `### T<k> <name> · p:<1-10> · m:<model> · owns: <globs> · deps: <ids or —> · status: <todo | doing:<worker> | done | blocked:<why>>`, plus optional `shares:` for files owned elsewhere.
 
 ## Commands
@@ -174,6 +185,8 @@ Lowering limits never kills running workers; it only stops new launches.
 **Does it test my code?** As much as `rigor` says. By default each thread runs only its own `check:`, and the lead runs one cheap whole-project check at the end. Passing checks print nothing; on failure you get the exit code, the first few error lines and a log path. Rerun with `-v`/`--verbose` or read `.hyper/logs/` for more.
 
 **What does it send where?** Hyperdo adds no network calls of its own. The agents talk to Claude as usual, and in `solo` mode workers `git push` to your `origin`. The installer only runs `claude plugin` commands against this directory.
+
+**Do I have to manage phases?** No. The lead adds them to long plans, `/hyper:add` files new threads into the right one, and short plans have none.
 
 **How do I remove it?** `./uninstall.sh` removes `~/.claude/hyperdo`, the plugin and the marketplace. Per-project state stays; run `/hyper:clean` in each project for that.
 

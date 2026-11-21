@@ -39,3 +39,11 @@
 [T13 20:06] EVAL 8 no "when to use / not use" guidance, so visitor can't judge fit; License section reads as an apology
 [T13 20:06] EVAL 9 verified OK: install steps, uninstall, all commands/flags/aliases, config keys+defaults, mermaid syntax, no hyperlane; no LICENSE file exists (not inventing one)
 [T13 20:12] DONE: README.md (rewritten; no LICENSE file exists, README says so; mermaid not machine-parsed, syntax reviewed by eye)
+[lead] ADD T14 p:5: automatic phases — close the gate + grouping holes, keep it light
+[T14 20:30] claimed; owns plan/add/do/status SKILL.md, WORKER.md, README.md
+[T14 20:30] DESIGN 1 format: optional `## Phase N <name>` headings over threads + one `gate: <cmd|condition>` line; ids global; `· hold` suffix on heading = lead skips its todo threads (1 line, kept)
+[T14 20:30] DESIGN 2 derivation: /hyper:plan groups by dep depth/milestone and writes gates; ≤4 threads or 1 dep level → no phases (flat plans unchanged)
+[T14 20:30] DESIGN 3 binding: thread waits on gate of phase N only if it has a dep in phase N; otherwise deps+p as today; gate run once after phase's last thread done, silent per Checks, PHASE N DONE / PHASE N FAIL <log> + fix thread in that phase; prod asks approval before next phase
+[T14 20:30] DESIGN 4 add: phase of latest dep, else current open phase; re-opens a gated phase; reply appends (phase N). do "<task>" outside phases; status: done phases one line, open expanded
+[T14 20:36] DEFAULT prod approval asked once per gate before its dependent threads start; hold kept (1 line); clean/init untouched (phases live in PLAN.md, nothing breaks)
+[T14] DONE: plugins/hyper/skills/{plan,add,do,status}/SKILL.md, WORKER.md, README.md (automatic phases). User must re-run install.sh to pick up new WORKER.md

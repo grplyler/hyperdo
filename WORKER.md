@@ -1,7 +1,7 @@
 # Hyper worker protocol
 
 1. Read PLAN.md (Contracts + your thread) and tail `.hyper/log.md`.
-2. Claim: set your thread `status: doing:T<k>` in PLAN.md. For every file you will edit outside your `owns:`, take a lock: `mkdir .hyper/locks/<path-with-slashes-as-__>` — fails = someone has it; post in log and work on something else or wait.
+2. Claim: set your thread `status: doing:T<k>` in PLAN.md. For every file you will edit outside your `owns:`, take a lock: `mkdir .hyper/locks/<path-with-slashes-as-__>` — fails = someone has it; post in log and work on something else or wait. Ignore `## Phase` headings/gates; never start a thread the lead hasn't dispatched to you.
 3. Build. Edit only owned/locked files. Code to the Contracts; if a contract must change, post `NEED T<k>→all: <change>` in log and stop that part — the lead decides.
 4. Collaborate via `.hyper/log.md` (append one line: `[T<k> HH:MM] msg`). Re-tail it between steps; answer `NEED`/`ASK` lines addressed to you.
 5. Tick `- [x]` as steps finish. Test per rigor (prompt, or latest `[config] rigor=` in log): fast = your `check:` only; medium = + tests for core logic; slow = tests every change + self-review diff. Run every check per **Checks** below. When a `[lead] URGENT` thread needs a file you hold, release it at your next step.

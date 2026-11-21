@@ -30,6 +30,8 @@ state: .hyper/ (limits + rigor live in .hyper/config)
 - [ ] step
 - [ ] check: <one cheap command>
 ```
+**Phases** (automatic, lead-only; never ask the user): if >4 threads and >1 dependency level, group threads under `## Phase N <name>` headings (by dep depth / milestone) inside `## Threads`, each followed by one `gate: <integration check command or observable condition>`. Ids stay global; deps/p/owns unchanged. Smaller plans stay flat. `· hold` on a heading = skip its todo threads until removed.
+
 status ∈ todo | doing:<worker> | done | blocked:<why>. `p:` priority 1-10 (10 highest, default 5). `m:` model opus|sonnet|haiku, set per thread by the routing rule below.
 
 Create `.hyper/`: `config` (`max_workers=N`, `max_do=2`, `rigor=fast`, `model=auto`, `dev_mode=solo`, `code_mode=off` = record of Claude Code Code Mode, see /hyper:config), `log.md` (shared chat, append-only), `locks/` (empty), `logs/` (empty, check output). Add `.hyper/` to .gitignore if git.
@@ -40,6 +42,7 @@ Loop until all threads done. **Re-read `.hyper/config` every dispatch** (user ma
 - Ready = todo with deps done, sorted by `p:` desc. Launch up to max_workers minus running in **one message** (Agent tool, background), each prompt: `You are hyper worker T<k>. Rigor: <rigor>. Dev mode: <dev_mode>. Read and follow ~/.claude/hyperdo/WORKER.md. Thread: T<k> in <abs path>/PLAN.md.`
 - Model: pass Agent `model` = thread's `m:` tag, else config `model` if not `auto`, else route: **opus** = architecture/contracts, tricky algorithms, cross-cutting refactors, debugging unknown failures, p≥9; **sonnet** = normal feature/thread work (default); **haiku** = mechanical edits, renames, boilerplate, docs, config, running checks.
 - Dev mode (config `dev_mode`, default solo; rules in WORKER.md "Dev mode"): lead merges/pushes per mode (solo: workers push themselves, nothing to merge; pro/prod: merge each thread's PR once checks pass, prod also needs user approval). Not a git repo → skip git steps silently.
+- Phases: a thread waits on phase N's gate only if it has a dep in phase N; otherwise deps + p as usual (never serialize). When a phase's last thread is done, run its gate once per **Checks** (`.hyper/logs/lead-phaseN.log`): ok → log `[lead] PHASE N DONE`; fail → `[lead] PHASE N FAIL <log>` and add a fix thread to that phase. dev_mode=prod: ask user approval before gated threads start; solo/pro never ask.
 - On each completion: read its log lines, flip status, launch next ready thread immediately. Don't wait for batches.
 - Lead is the bottleneck: keep your turns tiny, never do worker work while workers run.
 - End (per rigor — fast: one cheapest check; medium: + affected tests; slow: + full suite & self-review): run the cheapest whole-project check once (build/typecheck). Run it per the **Checks** rule in WORKER.md (output to `.hyper/logs/lead-<check>.log`, silent on exit 0, on failure only exit code + ≤10 error lines + log path). Fix or spawn a fix thread. Report done/total in 3 lines.
