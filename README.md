@@ -14,6 +14,8 @@
 
 *Revolutionary. Disruptive. Fits in a Markdown file. We checked.*
 
+**Why?** Cause I wanted to build something way cooler and needed this to do so.
+
 </div>
 
 > **NEW:** Hyperdo now supports being installed. (It always did. We needed an announcement.)
