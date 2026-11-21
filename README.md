@@ -2,7 +2,7 @@
 
 # Hyperdo
 
-**Run several Claude Code agents on one project at once, without them stepping on each other.**
+**Minimal parallel agent orchestration for Claude Code. One lead plans the work as threads in PLAN.md; background workers build them side by side, coordinated by file locks and a shared log. Markdown-only state, no dependencies.**
 
 ![Claude Code plugin](https://img.shields.io/badge/Claude_Code-plugin-D97757?style=flat-square)
 
