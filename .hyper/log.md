@@ -76,3 +76,5 @@
 [T19 20:00] DONE: site/index.html, artifact https://claude.ai/artifact/7Jx8Z3xwXqR6hbymdhwUaM (private)
 [lead] ADD T20 p:5: publish landing page on GitHub Pages, link from README + repo homepage (hyperdo.github.io unavailable: account taken)
 [T20 20:04] DONE: docs/index.html, docs/.nojekyll, README.md; live at https://grplyler.github.io/hyperdo/ (hyperdo.github.io unavailable: account taken); repo homepage set
+[lead] ADD T21 p:5: remove Codex support and mentions; keep README support tracker with "Too bad" on the Codex row
+[T21 20:20] DONE: install.sh, uninstall.sh (restored from bace59d^), CODEX.md (removed), README.md, docs/index.html (commit 2a46833, pushed)
