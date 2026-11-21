@@ -8,6 +8,8 @@
 
 ![Claude Code plugin](https://img.shields.io/badge/Claude_Code-plugin-D97757?style=flat-square) [![License: MIT](https://img.shields.io/badge/License-MIT-blue?style=flat-square)](LICENSE)
 
+**[→ The extremely serious website](https://grplyler.github.io/hyperdo/)**
+
 </div>
 
 Hyperdo is small on purpose. The whole plugin is 7 Markdown skill files plus one `WORKER.md` protocol, about 230 lines together, installed by a 7-line shell script. No runtime, no daemon, no server, no database: it needs only the `claude` CLI and bash. All state is plain files in your repo (`PLAN.md` and `.hyper/`) that you can read and edit by hand, and `./uninstall.sh` removes everything it installed.
