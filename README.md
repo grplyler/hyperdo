@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="assets/mascot.svg" width="160" alt="Hyperdo mascot: a goofy orange blob with mismatched googly eyes and six noodle arms, each ticking its own checkbox">
+
 # Hyperdo
 
 **Minimal parallel agent orchestration for Claude Code. One lead plans the work as threads in PLAN.md; background workers build them side by side, coordinated by file locks and a shared log. Markdown-only state, no dependencies.**

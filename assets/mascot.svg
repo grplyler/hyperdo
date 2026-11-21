@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img">
+  <title>Hyperdo mascot</title>
+  <desc>A wobbly orange blob with mismatched googly eyes, a lopsided grin and six noodle arms, each one ticking off its own checkbox without bumping into the others.</desc>
+
+  <!-- Palette: orange body, dark brown outline, cream, plus one colour per checkbox -->
+  <defs>
+    <!-- UNION: overlapping lumps = one body. Drawn twice (fat dark, then orange) so only the outer edge gets an outline -->
+    <g id="body">
+      <ellipse cx="256" cy="300" rx="125" ry="100"/>
+      <circle cx="170" cy="330" r="70"/>
+      <circle cx="345" cy="335" r="68"/>
+      <circle cx="215" cy="228" r="60"/>
+      <circle cx="305" cy="232" r="58"/>
+      <ellipse cx="200" cy="402" rx="38" ry="24"/>
+      <ellipse cx="316" cy="402" rx="38" ry="24"/>
+    </g>
+
+    <!-- Noodle arms: same two-pass trick, so each arm reads as one outlined tube -->
+    <g id="arms" fill="none" stroke-linecap="round">
+      <path d="M185 250 C110 240 85 200 78 150"/>
+      <path d="M228 205 C215 150 200 120 192 82"/>
+      <path d="M288 205 C300 155 328 125 346 86"/>
+      <path d="M338 250 C405 240 430 200 438 150"/>
+      <path d="M130 335 C80 335 52 322 44 296"/>
+      <path d="M388 340 C438 342 462 332 470 306"/>
+    </g>
+
+    <!-- SUBTRACTION: highlight crescent = big circle minus offset circle (via mask) -->
+    <mask id="crescent">
+      <rect width="512" height="512" fill="#000"/>
+      <circle cx="170" cy="335" r="52" fill="#fff"/>
+      <circle cx="184" cy="322" r="50" fill="#000"/>
+    </mask>
+
+    <!-- INTERSECTION: pupils and tongue only show where they overlap the eye / mouth -->
+    <clipPath id="eyeL"><circle cx="205" cy="268" r="40"/></clipPath>
+    <clipPath id="eyeR"><circle cx="318" cy="252" r="28"/></clipPath>
+    <clipPath id="mouth"><path id="mouthShape" d="M190 340 C196 412 322 414 330 336 Z"/></clipPath>
+
+    <!-- One checkbox, centred on 0,0; each use below places and recolours it -->
+    <g id="box">
+      <rect x="-26" y="-26" width="52" height="52" rx="11" fill="#fff4e0" stroke="#4a2418" stroke-width="8"/>
+    </g>
+    <path id="tick" d="M-13 1 L-4 12 L15 -13" fill="none" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  </defs>
+
+  <!-- ARMS (behind the body) -->
+  <use href="#arms" stroke="#4a2418" stroke-width="32"/>
+  <use href="#arms" stroke="#D97757" stroke-width="18"/>
+
+  <!-- CHECKBOXES, one per hand; one is left unticked, still working on it -->
+  <g transform="translate(78 110) rotate(-12)"><use href="#box"/><use href="#tick" stroke="#2a9d8f"/></g>
+  <g transform="translate(192 42) rotate(8)"><use href="#box"/><use href="#tick" stroke="#f0b429"/></g>
+  <g transform="translate(346 46) rotate(-6)"><use href="#box"/></g>
+  <g transform="translate(438 110) rotate(12)"><use href="#box"/><use href="#tick" stroke="#e8607a"/></g>
+  <g transform="translate(44 256) rotate(-8)"><use href="#box"/><use href="#tick" stroke="#7b5ea7"/></g>
+  <g transform="translate(470 266) rotate(10)"><use href="#box"/><use href="#tick" stroke="#2a9d8f"/></g>
+
+  <!-- HANDS: little round grips on the lower edge of each box -->
+  <g fill="#D97757" stroke="#4a2418" stroke-width="8">
+    <circle cx="78" cy="152" r="14"/>
+    <circle cx="192" cy="84" r="14"/>
+    <circle cx="346" cy="88" r="14"/>
+    <circle cx="438" cy="152" r="14"/>
+    <circle cx="44" cy="298" r="14"/>
+    <circle cx="470" cy="308" r="14"/>
+  </g>
+
+  <!-- BODY -->
+  <use href="#body" fill="#4a2418" stroke="#4a2418" stroke-width="20" stroke-linejoin="round"/>
+  <use href="#body" fill="#D97757"/>
+  <g mask="url(#crescent)"><circle cx="170" cy="335" r="52" fill="#f2a082"/></g>
+
+  <!-- CHEEKS -->
+  <circle cx="150" cy="338" r="15" fill="#f58fa0" opacity="0.7"/>
+  <circle cx="372" cy="318" r="15" fill="#f58fa0" opacity="0.7"/>
+
+  <!-- EYES: mismatched sizes, pupils looking in different directions -->
+  <circle cx="205" cy="268" r="40" fill="#fff4e0" stroke="#4a2418" stroke-width="8"/>
+  <g clip-path="url(#eyeL)">
+    <circle cx="224" cy="288" r="22" fill="#4a2418"/>
+    <circle cx="231" cy="281" r="7" fill="#fff4e0"/>
+  </g>
+  <circle cx="318" cy="252" r="28" fill="#fff4e0" stroke="#4a2418" stroke-width="8"/>
+  <g clip-path="url(#eyeR)">
+    <circle cx="304" cy="240" r="17" fill="#4a2418"/>
+    <circle cx="309" cy="235" r="5" fill="#fff4e0"/>
+  </g>
+
+  <!-- EYEBROWS: one worried, one smug -->
+  <path d="M165 218 Q196 196 238 212" fill="none" stroke="#4a2418" stroke-width="9" stroke-linecap="round"/>
+  <path d="M292 214 Q322 198 350 220" fill="none" stroke="#4a2418" stroke-width="9" stroke-linecap="round"/>
+
+  <!-- MOUTH: wide lopsided grin, tongue clipped to it, one wonky tooth -->
+  <use href="#mouthShape" fill="#4a2418" stroke="#4a2418" stroke-width="8" stroke-linejoin="round"/>
+  <g clip-path="url(#mouth)">
+    <ellipse cx="268" cy="394" rx="38" ry="24" fill="#f58fa0"/>
+    <rect x="206" y="336" width="22" height="26" rx="5" fill="#fff4e0" transform="rotate(8 217 349)"/>
+  </g>
+</svg>
