@@ -23,12 +23,12 @@
 > [!NOTE]
 > This README is silly on purpose. The jokes are labelled; the commands, install steps, tables and anything in a code block are real and checked against the source.
 
-Hyperdo is small on purpose. The whole plugin is 7 Markdown skill files plus one `WORKER.md` protocol, about 230 lines together, installed by a 7-line shell script. No runtime, no daemon, no server, no database: it needs only the `claude` CLI and bash. All state is plain files in your repo (`PLAN.md` and `.hyper/`) that you can read and edit by hand, and `./uninstall.sh` removes everything it installed.
+Hyperdo is small on purpose. The whole plugin is 7 Markdown skill files plus one `WORKER.md` protocol, about 230 lines together, installed by a 17-line shell script. No runtime, no daemon, no server, no database: it needs only the `claude` CLI (or `codex`, experimental) and bash. All state is plain files in your repo (`PLAN.md` and `.hyper/`) that you can read and edit by hand, and `./uninstall.sh` removes everything it installed.
 
 | 7 | ~230 | 0 | 0 |
 | :---: | :---: | :---: | :---: |
 | Markdown skill files, plus one `WORKER.md` | lines, all of it together | runtimes, daemons, servers or databases | merge conflicts, by design\* |
-| *It is a short read. Read it.* | *Your last PR was longer.* | *Just the `claude` CLI and bash.* | *\*By design. Your design may vary.* |
+| *It is a short read. Read it.* | *Your last PR was longer.* | *Just the `claude` (or `codex`) CLI and bash.* | *\*By design. Your design may vary.* |
 
 You describe a goal. Hyperdo splits it into parallel **threads**, each owning a disjoint set of files, and launches background Claude agents to build them.
 
@@ -38,7 +38,7 @@ You describe a goal. Hyperdo splits it into parallel **threads**, each owning a 
 
 ## Install
 
-Needs the [`claude` CLI](https://claude.com/claude-code) and bash.
+Needs the [`claude` CLI](https://claude.com/claude-code) and bash. The same script also installs for Codex if `codex` is on your PATH.
 
 ```bash
 git clone https://github.com/grplyler/hyperdo.git
@@ -47,7 +47,17 @@ cd hyperdo && ./install.sh
 
 Restart Claude Code, then run `/hyper:init` and `/hyper:plan` in any project.
 
+In Codex the commands are skills: `$hyper-init`, `$hyper-plan`, `$hyper-add` and so on. Restart Codex after installing.
+
 That's the whole install. There is no step 3, no account, no "book a demo" and nothing to upgrade at 2am.
+
+### Support tracker
+
+| Tool | Status | How it installs | Notes |
+| --- | --- | --- | --- |
+| Claude Code | ✅ Supported | Plugin: `/hyper:*` commands | Where Hyperdo is built and used every day. |
+| Codex CLI | 🧪 Experimental | Skills in `~/.codex/skills/hyper-*`: `$hyper-*` | The installer is tested; a full plan run inside Codex is not yet. Each skill gets a short "Codex notes" section ([CODEX.md](CODEX.md)) mapping Claude-specific steps. `m:` model tags and `code_mode` are ignored. |
+| Anything else | ❌ Not yet | — | The whole thing is Markdown, so a port is mostly a copy. PRs welcome. |
 
 ## How you'd expect it to work
 
@@ -281,7 +291,7 @@ Questions, some answered. The first eight are real.
 
 **Do I have to manage phases?** No. They are automatic and optional: the lead adds them only to long plans and files new threads into the right one.
 
-**How do I remove it?** `./uninstall.sh` removes `~/.claude/hyperdo`, the plugin and the marketplace. Per-project state stays; run `/hyper:clean` in each project for that.
+**How do I remove it?** `./uninstall.sh` removes `~/.claude/hyperdo`, the plugin and the marketplace, plus `~/.codex/hyperdo` and the `hyper-*` Codex skills. Per-project state stays; run `/hyper:clean` in each project for that.
 
 **Will it replace me?** *(joke)* No. Someone has to press Enter, and someone has to be blamed.
 
@@ -294,8 +304,9 @@ Questions, some answered. The first eight are real.
 The whole system is Markdown plus two short shell scripts, so changes are easy to review.
 
 - Commands live in `plugins/hyper/skills/<name>/SKILL.md` (frontmatter `name` and `description`, then the instructions).
-- The worker protocol is `WORKER.md`; `install.sh` copies it to `~/.claude/hyperdo/`. Re-run `./install.sh` after changing it.
+- The worker protocol is `WORKER.md`; `install.sh` copies it to `~/.claude/hyperdo/` (and `~/.codex/hyperdo/` for Codex). Re-run `./install.sh` after changing it.
 - The command list is mirrored in `.claude-plugin/marketplace.json` and the `install.sh` echo line; update all three when adding a command.
+- Codex gets the same skills, renamed `hyper-<name>`, with `CODEX.md` appended. Keep Codex-only wording in `CODEX.md`, not in the skills.
 - Keep it minimal: fewer words in a skill, and no new moving parts without a strong reason.
 
 ## License

@@ -246,6 +246,7 @@ footer.site .disc { color: var(--ink); background: var(--surface-2); border: 1px
     <h1 style="margin-top:14px">Do five things at once. <span class="grad">Understand none of them.</span></h1>
     <p class="pitch"><b>Minimal parallel agent orchestration for Claude Code.</b> One lead plans the work as threads in PLAN.md; background workers build them side by side, coordinated by file locks and a shared log. Markdown-only state, no dependencies.</p>
     <p class="aside">Revolutionary. Disruptive. Fits in a Markdown file. We checked.</p>
+      <p class="aside" style="font-style:normal;color:var(--ink)"><b>Why?</b> Cause I wanted to build something way cooler and needed this to do so.</p>
     <div class="btns">
       <a class="btn primary" href="#install">Install it</a>
       <button class="btn ghost" id="demoBtn" type="button">Request a demo</button>
@@ -396,7 +397,7 @@ footer.site .disc { color: var(--ink); background: var(--surface-2); border: 1px
 <div class="facts">
   <div class="fact"><b>7</b><span>Markdown skill files, plus one <code>WORKER.md</code></span><small>It is a short read. Read it.</small></div>
   <div class="fact"><b>~230</b><span>lines, all of it together</span><small>Your last PR was longer.*</small></div>
-  <div class="fact"><b>0</b><span>runtimes, daemons, servers or databases</span><small>Just the <code>claude</code> CLI and bash.</small></div>
+  <div class="fact"><b>0</b><span>runtimes, daemons, servers or databases</span><small>Just the <code>claude</code> (or <code>codex</code>) CLI and bash.</small></div>
   <div class="fact"><b>0</b><span>merge conflicts, by design</span><small>*By design. Your design may vary.</small></div>
 </div>
 
@@ -410,7 +411,7 @@ footer.site .disc { color: var(--ink); background: var(--surface-2); border: 1px
     <div class="card"><h3>File locks, not worktrees</h3><p>A thread declares the files it <code>owns:</code>. Touching anything else takes a lock first: <code>mkdir .hyper/locks/&lt;path&gt;</code> is atomic and fails if someone has it. No daemon.</p><p class="tr">Translation: a polite sign on the bathroom door.</p></div>
     <div class="card"><h3>A shared log</h3><p>Workers append to <code>.hyper/log.md</code>, ask for contract changes with <code>NEED</code>, and release files when an urgent thread shows up.</p><p class="tr">Translation: a group chat where everyone has read the instructions.</p></div>
     <div class="card"><h3>Markdown-only state</h3><p>All state is plain files in your repo (<code>PLAN.md</code> and <code>.hyper/</code>). Edit <code>PLAN.md</code> by hand whenever you like; the lead and workers re-read it.</p><p class="tr">Translation: the database is a text file. Yes, really.</p></div>
-    <div class="card"><h3>No dependencies</h3><p>It needs the <code>claude</code> CLI and bash. A 7-line shell script installs it, and <code>./uninstall.sh</code> removes everything it installed.</p><p class="tr">Translation: nothing to upgrade at 2am.</p></div>
+    <div class="card"><h3>No dependencies</h3><p>It needs the <code>claude</code> CLI (or <code>codex</code>, experimental) and bash. A 17-line shell script installs it, and <code>./uninstall.sh</code> removes everything it installed.</p><p class="tr">Translation: nothing to upgrade at 2am.</p></div>
   </div>
 
   <div class="demo" aria-labelledby="demoH">
@@ -514,7 +515,7 @@ footer.site .disc { color: var(--ink); background: var(--surface-2); border: 1px
 <section class="final" id="install">
   <p class="eyebrow">Install</p>
   <h2 style="margin-top:10px">Get it done. Or at least get it started.</h2>
-  <p class="lede" style="margin-inline:auto">Needs the <a href="https://claude.com/claude-code">claude CLI</a> and bash.</p>
+  <p class="lede" style="margin-inline:auto">Needs the <a href="https://claude.com/claude-code">claude CLI</a> and bash. Also installs for Codex if it is on your PATH (experimental).</p>
   <div class="code"><pre id="inst">git clone https://github.com/grplyler/hyperdo.git
 cd hyperdo &amp;&amp; ./install.sh</pre><button class="copy" type="button" data-copy="inst">Copy</button></div>
   <p class="steps">Restart Claude Code, then run <code style="background:var(--surface-2);padding:1px 5px;border-radius:5px">/hyper:init</code> and <code style="background:var(--surface-2);padding:1px 5px;border-radius:5px">/hyper:plan</code> in any project.</p>
