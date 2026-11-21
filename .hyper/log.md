@@ -66,3 +66,7 @@
 [lead] ADD T17 p:5: add MIT LICENSE (Copyright 2026 Ryan Plyler), update README license section
 [T17 19:42] claimed; locks README.md, .claude-plugin/marketplace.json; LICENSE owned
 [T17 19:42] DONE: LICENSE, README.md (commit cf21d05, pushed); marketplace/plugin.json have no license field, left unchanged
+[lead] ADD T18 p:5: goofy mascot drawn in code (hand-written SVG, CSG-style), shown at top of README
+[T18 19:44] claimed; locks README.md
+[T18 19:44] DESIGN blob 'Noodlebert': wobbly orange body (union of lumps), mismatched googly eyes (pupils clipped to eye whites), wide grin w/ clipped tongue, crescent highlight (circle minus circle via mask), 6 noodle arms each ticking its own checkbox in a different colour, none crossing
+[T18 19:45] DONE: assets/mascot.svg, README.md (rendered via rsvg-convert at 512/120px on white + #0d1117 and viewed; pushed)
