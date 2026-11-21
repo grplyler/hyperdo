@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="assets/mascot.svg" width="160" alt="Hyperdo mascot: a goofy orange bird with mismatched googly eyes, standing on one leg and juggling four checkboxes">
+<img src="assets/mascot.svg" width="160" alt="Hyperdo mascot: a small round orange bird sprinting flat out while juggling five checkboxes, four already ticked">
 
 # Hyperdo
 

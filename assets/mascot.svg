@@ -1,106 +1,135 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img">
   <title>Hyperdo mascot</title>
-  <desc>A chubby orange bird with mismatched googly eyes and a wide-open beak, standing on one leg while juggling four checkboxes: one in each wing, one balanced on its head, and an unticked one gripped in its raised foot.</desc>
+  <desc>A small round orange bird sprinting flat out while juggling five checkboxes in a high arc: wings a blur, feathers and sweat flying, tongue out in concentration, eyes locked on the last unticked box. Four of the five are already ticked.</desc>
 
   <!-- Palette: orange body, dark brown outline, cream belly, yellow beak and legs, one colour per tick -->
   <defs>
-    <!-- UNION: head circle + body ellipse = one pear-shaped bird. Drawn twice (fat dark, then orange) so only the outer edge gets an outline -->
+    <!-- UNION: head circle + body ellipse = one round bird. Drawn twice (fat dark, then orange) so only the outer edge gets an outline -->
     <g id="body">
-      <circle cx="256" cy="215" r="95"/>
-      <ellipse cx="256" cy="320" rx="125" ry="110"/>
+      <circle cx="256" cy="272" r="84"/>
+      <ellipse cx="256" cy="352" rx="104" ry="84"/>
     </g>
-    <clipPath id="bodyClip"><circle cx="256" cy="215" r="95"/><ellipse cx="256" cy="320" rx="125" ry="110"/></clipPath>
+    <clipPath id="bodyClip"><circle cx="256" cy="272" r="84"/><ellipse cx="256" cy="352" rx="104" ry="84"/></clipPath>
 
-    <!-- Wings, raised: same two-pass trick, so each reads as one outlined flipper -->
+    <!-- Wings mid-flap, plus two "ghost" positions each for the motion blur -->
     <g id="wings" fill="none" stroke-linecap="round">
-      <path d="M160 300 C108 292 78 252 70 208"/>
-      <path d="M352 300 C404 292 434 252 442 208"/>
+      <path d="M178 340 C132 330 104 298 98 256"/>
+      <path d="M334 340 C380 330 408 298 414 256"/>
+    </g>
+    <g id="ghosts" fill="none" stroke-linecap="round">
+      <path d="M178 340 C140 318 132 276 142 240"/>
+      <path d="M178 344 C128 348 92 328 74 300"/>
+      <path d="M334 340 C372 318 380 276 370 240"/>
+      <path d="M334 344 C384 348 420 328 438 300"/>
     </g>
 
-    <!-- Tail feathers and head tuft -->
+    <!-- Tail feathers streaming behind, frazzled head tuft -->
     <g id="tail" fill="none" stroke-linecap="round">
-      <path d="M165 380 L96 366"/>
-      <path d="M165 392 L84 398"/>
-      <path d="M170 404 L98 430"/>
+      <path d="M176 392 L112 372"/>
+      <path d="M174 404 L100 404"/>
+      <path d="M180 416 L116 438"/>
     </g>
-    <g id="tuft" fill="none" stroke-linecap="round">
-      <path d="M250 130 Q236 108 222 98"/>
-      <path d="M256 130 Q256 104 258 90"/>
-      <path d="M262 130 Q278 110 294 102"/>
+    <g id="tuft" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M244 196 L226 176 L236 168 L218 152"/>
+      <path d="M256 194 L250 170 L262 164 L254 144"/>
+      <path d="M268 196 L284 178 L276 168 L296 154"/>
     </g>
 
-    <!-- Legs: one planted with three toes, one raised and gripping a checkbox -->
+    <!-- Legs at full sprint: one kicked back, one reaching forward -->
     <g id="legs" fill="none" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M232 420 L232 474 M206 486 L232 474 L232 492 M232 474 L258 486"/>
-      <path d="M300 415 C330 446 372 446 398 424 M398 424 L414 410 M398 424 L418 430"/>
+      <path d="M234 428 L204 462 L176 450 M204 462 L184 474 M204 462 L208 480"/>
+      <path d="M280 428 L318 456 L346 446 M318 456 L342 468 M318 456 L322 476"/>
     </g>
 
     <!-- SUBTRACTION: highlight crescent = circle minus offset circle (via mask) -->
     <mask id="crescent">
       <rect width="512" height="512" fill="#000"/>
-      <circle cx="205" cy="180" r="50" fill="#fff"/>
-      <circle cx="218" cy="192" r="50" fill="#000"/>
+      <circle cx="208" cy="240" r="44" fill="#fff"/>
+      <circle cx="220" cy="251" r="44" fill="#000"/>
     </mask>
 
-    <!-- INTERSECTION: pupils and tongue only show where they overlap the eye / mouth -->
-    <clipPath id="eyeL"><circle cx="213" cy="215" r="42"/></clipPath>
-    <clipPath id="eyeR"><circle cx="302" cy="208" r="30"/></clipPath>
-    <clipPath id="mouth"><path id="mouthShape" d="M238 266 Q258 316 280 264 Z"/></clipPath>
+    <!-- INTERSECTION: pupils only show where they overlap the eye -->
+    <clipPath id="eyeL"><circle cx="220" cy="266" r="40"/></clipPath>
+    <clipPath id="eyeR"><circle cx="296" cy="262" r="33"/></clipPath>
 
-    <!-- One checkbox, centred on 0,0; each use below places and recolours it -->
-    <g id="box">
-      <rect x="-26" y="-26" width="52" height="52" rx="11" fill="#fff4e0" stroke="#4a2418" stroke-width="8"/>
-    </g>
-    <path id="tick" d="M-13 1 L-4 12 L15 -13" fill="none" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- Reusable bits, centred on 0,0: checkbox, tick, sweat drop, loose feather, dust puff -->
+    <rect id="box" x="-24" y="-24" width="48" height="48" rx="10" fill="#fff4e0" stroke="#4a2418" stroke-width="8"/>
+    <path id="tick" d="M-12 1 L-4 11 L14 -12" fill="none" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+    <path id="drop" d="M0 -14 C9 0 9 10 0 10 C-9 10 -9 0 0 -14 Z" fill="#8fd0f0" stroke="#4a2418" stroke-width="6" stroke-linejoin="round"/>
+    <path id="feather" d="M0 -18 C12 -6 12 8 0 18 C-12 8 -12 -6 0 -18 Z" fill="#c2603f" stroke="#4a2418" stroke-width="6" stroke-linejoin="round"/>
   </defs>
 
+  <!-- JUGGLING ARC + SPEED LINES: dashed trails, readable on light and dark -->
+  <g fill="none" stroke="#f2a082" stroke-width="7" stroke-linecap="round">
+    <path d="M70 226 A196 196 0 0 1 442 226" stroke-dasharray="2 20"/>
+    <path d="M30 356 H82 M18 392 H66 M40 428 H84"/>
+  </g>
+
+  <!-- DUST PUFFS kicked up behind -->
+  <g fill="#fff4e0" stroke="#4a2418" stroke-width="7">
+    <circle cx="118" cy="474" r="17"/>
+    <circle cx="86" cy="466" r="12"/>
+    <circle cx="146" cy="484" r="11"/>
+  </g>
+
   <!-- TAIL + TUFT (behind the body) -->
-  <use href="#tail" stroke="#4a2418" stroke-width="30"/>
-  <use href="#tail" stroke="#c2603f" stroke-width="16"/>
-  <use href="#tuft" stroke="#4a2418" stroke-width="22"/>
-  <use href="#tuft" stroke="#c2603f" stroke-width="9"/>
+  <use href="#tail" stroke="#4a2418" stroke-width="28"/>
+  <use href="#tail" stroke="#c2603f" stroke-width="14"/>
+  <use href="#tuft" stroke="#4a2418" stroke-width="20"/>
+  <use href="#tuft" stroke="#c2603f" stroke-width="8"/>
 
-  <!-- CHECKBOXES: two in the wings, one balanced on the head, one in the foot (still unticked) -->
-  <g transform="translate(64 166) rotate(-12)"><use href="#box"/><use href="#tick" stroke="#2a9d8f"/></g>
-  <g transform="translate(448 166) rotate(12)"><use href="#box"/><use href="#tick" stroke="#e8607a"/></g>
-  <g transform="translate(262 60) rotate(9)"><use href="#box"/><use href="#tick" stroke="#7b5ea7"/></g>
-  <g transform="translate(436 404) rotate(14)"><use href="#box"/></g>
+  <!-- CHECKBOXES in the air, tumbling; the one at the top is the last still unticked -->
+  <g transform="translate(66 196) rotate(-28)"><use href="#box"/><use href="#tick" stroke="#2a9d8f"/></g>
+  <g transform="translate(138 92) rotate(16)"><use href="#box"/><use href="#tick" stroke="#f0b429"/></g>
+  <g transform="translate(256 48) rotate(-9)"><use href="#box"/></g>
+  <g transform="translate(374 92) rotate(24)"><use href="#box"/><use href="#tick" stroke="#e8607a"/></g>
+  <g transform="translate(446 196) rotate(-18)"><use href="#box"/><use href="#tick" stroke="#7b5ea7"/></g>
 
-  <!-- WINGS + LEGS (in front of the boxes they hold, behind the body) -->
-  <use href="#wings" stroke="#4a2418" stroke-width="50"/>
-  <use href="#wings" stroke="#D97757" stroke-width="34"/>
-  <use href="#legs" stroke="#4a2418" stroke-width="22"/>
+  <!-- WINGS: faint ghosts first, then the solid pair -->
+  <use href="#ghosts" stroke="#D97757" stroke-width="30" opacity="0.3"/>
+  <use href="#wings" stroke="#4a2418" stroke-width="46"/>
+  <use href="#wings" stroke="#D97757" stroke-width="30"/>
+
+  <!-- LEGS -->
+  <use href="#legs" stroke="#4a2418" stroke-width="21"/>
   <use href="#legs" stroke="#f0b429" stroke-width="9"/>
 
   <!-- BODY, cream belly clipped to it, highlight -->
   <use href="#body" fill="#4a2418" stroke="#4a2418" stroke-width="20" stroke-linejoin="round"/>
   <use href="#body" fill="#D97757"/>
-  <g clip-path="url(#bodyClip)"><ellipse cx="256" cy="372" rx="84" ry="88" fill="#fff4e0"/></g>
-  <g mask="url(#crescent)"><circle cx="205" cy="180" r="50" fill="#f2a082"/></g>
+  <g clip-path="url(#bodyClip)"><ellipse cx="256" cy="396" rx="68" ry="64" fill="#fff4e0"/></g>
+  <g mask="url(#crescent)"><circle cx="208" cy="240" r="44" fill="#f2a082"/></g>
 
-  <!-- CHEEKS -->
-  <circle cx="160" cy="278" r="15" fill="#f58fa0" opacity="0.75"/>
-  <circle cx="352" cy="270" r="15" fill="#f58fa0" opacity="0.75"/>
+  <!-- CHEEKS: big blush -->
+  <circle cx="176" cy="318" r="18" fill="#f58fa0" opacity="0.8"/>
+  <circle cx="338" cy="312" r="18" fill="#f58fa0" opacity="0.8"/>
 
-  <!-- EYES: mismatched sizes, pupils looking in different directions -->
-  <circle cx="213" cy="215" r="42" fill="#fff4e0" stroke="#4a2418" stroke-width="8"/>
+  <!-- EYES: huge, mismatched, both locked on the unticked box overhead -->
+  <circle cx="220" cy="266" r="40" fill="#fff4e0" stroke="#4a2418" stroke-width="8"/>
   <g clip-path="url(#eyeL)">
-    <circle cx="232" cy="232" r="22" fill="#4a2418"/>
-    <circle cx="239" cy="225" r="7" fill="#fff4e0"/>
+    <circle cx="230" cy="250" r="25" fill="#4a2418"/>
+    <circle cx="239" cy="241" r="9" fill="#fff4e0"/>
+    <circle cx="222" cy="259" r="4" fill="#fff4e0"/>
   </g>
-  <circle cx="302" cy="208" r="30" fill="#fff4e0" stroke="#4a2418" stroke-width="8"/>
+  <circle cx="296" cy="262" r="33" fill="#fff4e0" stroke="#4a2418" stroke-width="8"/>
   <g clip-path="url(#eyeR)">
-    <circle cx="290" cy="196" r="17" fill="#4a2418"/>
-    <circle cx="295" cy="191" r="5" fill="#fff4e0"/>
+    <circle cx="288" cy="248" r="20" fill="#4a2418"/>
+    <circle cx="295" cy="241" r="7" fill="#fff4e0"/>
+    <circle cx="282" cy="255" r="3.5" fill="#fff4e0"/>
   </g>
 
-  <!-- EYEBROWS: one worried, one smug -->
-  <path d="M172 166 Q202 146 240 160" fill="none" stroke="#4a2418" stroke-width="9" stroke-linecap="round"/>
-  <path d="M282 168 Q306 154 332 172" fill="none" stroke="#4a2418" stroke-width="9" stroke-linecap="round"/>
+  <!-- EYEBROWS: one shot up in panic, one set in determination -->
+  <path d="M182 214 Q208 192 242 206" fill="none" stroke="#4a2418" stroke-width="9" stroke-linecap="round"/>
+  <path d="M276 226 Q298 222 326 208" fill="none" stroke="#4a2418" stroke-width="9" stroke-linecap="round"/>
 
-  <!-- BEAK: lower half hangs open with the tongue out, upper half sits on top -->
-  <path d="M228 258 Q258 336 290 256 Z" fill="#e09a1f" stroke="#4a2418" stroke-width="8" stroke-linejoin="round"/>
-  <use href="#mouthShape" fill="#4a2418"/>
-  <g clip-path="url(#mouth)"><ellipse cx="260" cy="302" rx="16" ry="14" fill="#f58fa0"/></g>
-  <path d="M214 254 Q258 222 302 252 Q260 284 214 254 Z" fill="#f0b429" stroke="#4a2418" stroke-width="8" stroke-linejoin="round"/>
+  <!-- BEAK: small, with the tongue poking out the side in concentration -->
+  <ellipse cx="274" cy="322" rx="11" ry="14" fill="#f58fa0" stroke="#4a2418" stroke-width="7" transform="rotate(-24 274 322)"/>
+  <path d="M232 304 Q258 284 284 304 Q258 326 232 304 Z" fill="#f0b429" stroke="#4a2418" stroke-width="8" stroke-linejoin="round"/>
+
+  <!-- SWEAT + LOOSE FEATHERS flying off -->
+  <use href="#drop" transform="translate(364 214) rotate(52)"/>
+  <use href="#drop" transform="translate(386 252) rotate(72) scale(0.75)"/>
+  <use href="#drop" transform="translate(150 204) rotate(-50) scale(0.8)"/>
+  <use href="#feather" transform="translate(452 372) rotate(38)"/>
+  <use href="#feather" transform="translate(408 452) rotate(-64) scale(0.8)"/>
 </svg>
