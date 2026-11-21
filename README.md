@@ -4,7 +4,7 @@
 
 **Minimal parallel agent orchestration for Claude Code. One lead plans the work as threads in PLAN.md; background workers build them side by side, coordinated by file locks and a shared log. Markdown-only state, no dependencies.**
 
-![Claude Code plugin](https://img.shields.io/badge/Claude_Code-plugin-D97757?style=flat-square)
+![Claude Code plugin](https://img.shields.io/badge/Claude_Code-plugin-D97757?style=flat-square) [![License: MIT](https://img.shields.io/badge/License-MIT-blue?style=flat-square)](LICENSE)
 
 </div>
 
@@ -200,4 +200,4 @@ The whole system is Markdown plus two short shell scripts, so changes are easy t
 
 ## License
 
-No `LICENSE` file yet.
+MIT — see [LICENSE](LICENSE).
