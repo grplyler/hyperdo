@@ -70,3 +70,7 @@
 [T18 19:44] claimed; locks README.md
 [T18 19:44] DESIGN blob 'Noodlebert': wobbly orange body (union of lumps), mismatched googly eyes (pupils clipped to eye whites), wide grin w/ clipped tongue, crescent highlight (circle minus circle via mask), 6 noodle arms each ticking its own checkbox in a different colour, none crossing
 [T18 19:45] DONE: assets/mascot.svg, README.md (rendered via rsvg-convert at 512/120px on white + #0d1117 and viewed; pushed)
+[lead] ADD T19 p:5: comical satirical landing page as an artifact, real key details + joke charts
+[T19 19:58] claimed site/index.html
+[T19 19:58] DESIGN parody of breathless dev-tool pages: absurd headline over the real pitch, jokes in asterisks/captions, real facts in cards/commands/FAQ. Sections: announce pill, hero+mascot sticker+install, fake logos, real-facts strip, what it does (6 cards), live demo (five bars stall at 99%), commands table, plan/log excerpt, 4 charts (alt-tabs 1 vs 5 agents, confidence vs understanding, PLAN.md hockey stick plateau 99%, afternoon donut), testimonials (fictional), pricing (solo/pro/prod = $0), FAQ, footer disclaimer
+[T19 20:00] DONE: site/index.html, artifact https://claude.ai/artifact/7Jx8Z3xwXqR6hbymdhwUaM (private)
