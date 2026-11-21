@@ -207,6 +207,8 @@ code, pre { font-family: var(--font-mono); }
 .quote p { font-size: 1.05rem; }
 .quote footer { margin-top: 12px; font-size: 0.85rem; color: var(--ink-2); }
 .quote footer b { color: var(--ink); }
+.quote.creator { grid-column: 1 / -1; border-width: 2px; border-color: var(--ink); }
+.quote.creator p { font-size: 1.25rem; }
 
 /* pricing */
 .price { text-align: left; }
@@ -473,6 +475,7 @@ footer.site .disc { color: var(--ink); background: var(--surface-2); border: 1px
   <p class="eyebrow">Testimonials</p>
   <h2 style="margin-top:10px">People are saying things</h2>
   <div class="quotes">
+    <blockquote class="quote creator"><p>"I literally made this in like 30 mins so I could be way cooler. But it Fu**ing works and I love that for me."</p><footer><b>The creator of Hyperdo</b> · the one real quote in this section</footer></blockquote>
     <blockquote class="quote"><p>"I pressed Enter once and now there are five of me. I have never been more efficient or more tired."</p><footer><b>A senior engineer, mass-produced</b> · Blorbo Labs, which does not exist</footer></blockquote>
     <blockquote class="quote"><p>"Please stop merging at 4:55 on a Friday. Love, me."</p><footer><b>Your future self</b> · reviewing the diff, via time machine</footer></blockquote>
     <blockquote class="quote"><p>"Quack. (Translation: the locks are just <code style="background:var(--surface-2);padding:0 4px;border-radius:4px">mkdir</code>. That is the whole trick.)"</p><footer><b>A rubber duck</b> · unprompted</footer></blockquote>
@@ -519,7 +522,8 @@ cd hyperdo &amp;&amp; ./install.sh</pre><button class="copy" type="button" data-
 </section>
 
 <footer class="site">
-  <p class="disc"><b>Plainly:</b> every chart, testimonial, company name and quote on this page is made up. The commands, install steps and the facts about how Hyperdo works are real. No performance claim here is a measurement, and there are no real user numbers because we have not invented any.</p>
+  <p class="disc"><b>Plainly:</b> every chart, testimonial, company name and quote on this page is made up, except the creator's quote, which is real. The commands, install steps and the facts about how Hyperdo works are real. No performance claim here is a measurement, and there are no real user numbers because we have not invented any.</p>
+  <p class="disc"><b>Also plainly:</b> Literally zero seriousness was used in the creation of this tool, and I had the Flu... So... use at your own discretion.</p>
   <p>Hyperdo is MIT licensed. Copyright 2026 Ryan Plyler. Source and README: <a href="https://github.com/grplyler/hyperdo">github.com/grplyler/hyperdo</a>.</p>
 </footer>
 
